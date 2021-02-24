@@ -10,21 +10,15 @@ import com.springbook.biz.board.BoardVO;
 
 @Service("boardService")
 public class BoardServiceImpl implements BoardService {
-//	@Pointcut("execution(* com.springbook.biz..*Impl.*(..))")
-//	public void allPointcut() {
-//		
-//	}
-
 	@Autowired
 	private BoardDAO boardDAO;
 
 	public void insertBoard(BoardVO vo) {
-		boardDAO.insertBoard(vo);
-
+		boardDAO.insertBoard(vo); 
 	}
 
-	public void updateBoard(BoardVO vo, String updatePurson) {
-		boardDAO.updateBoard(vo, updatePurson);
+	public void updateBoard(BoardVO vo) {
+		boardDAO.updateBoard(vo);
 	}
 
 	public void deleteBoard(BoardVO vo) {
@@ -38,5 +32,4 @@ public class BoardServiceImpl implements BoardService {
 	public List<BoardVO> getBoardList(BoardVO vo) {
 		return boardDAO.getBoardList(vo);
 	}
-
 }

@@ -12,49 +12,43 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.springbook.biz.board.BoardService;
 import com.springbook.biz.board.BoardVO;
-import com.springbook.biz.board.impl.BoardDAO;
 
 @Controller
 @SessionAttributes("board")
 public class BoardController {
-
 	@Autowired
-	private BoardService boardService;
+	private BoardService boardservice;
 
-	@RequestMapping("/insertBoard.do")
-	public String insertBoard(BoardVO vo) {
-		boardService.insertBoard(vo);
-		return "getBoardList.do";
+	// 글 등록
+	@RequestMapping(value = "/insertBoard.do")
+	public String InsertBoard(BoardVO vo) {
+		boardservice.insertBoard(vo);
+		return "redirect:getBoardList.do"; // return "getBoardList.do";
 	}
 
-	@RequestMapping("/updateBoard.do")
-	public String updateBoard(@ModelAttribute("board") BoardVO vo, String updatePurson) {
-
+	// 글 수정
+	@RequestMapping(value = "/updateBoard.do")
+	public String updateBoard(@ModelAttribute("board") BoardVO vo) {
 		System.out.println("번호 : " + vo.getSeq());
 		System.out.println("제목 : " + vo.getTitle());
 		System.out.println("작성자 : " + vo.getWriter());
 		System.out.println("내용 : " + vo.getContent());
 		System.out.println("등록일 : " + vo.getRegDate());
 		System.out.println("조회수 : " + vo.getCnt());
-		boardService.updateBoard(vo, updatePurson);
-		return "getBoardList.do";
+
+		boardservice.updateBoard(vo);
+		return "getBoardList.do"; // return "getBoardList.do";
 	}
 
-	@RequestMapping("/deleteBoard.do")
+	// 글 삭제
+	@RequestMapping(value = "/deleteBoard.do")
 	public String deleteBoard(BoardVO vo) {
-		boardService.deleteBoard(vo);
-		return "getBoardList.do";
+
+		boardservice.deleteBoard(vo);
+		return "getBoardList.do";// return "getBoardList.do";
 	}
 
-	@RequestMapping("/getBoard.do")
-	public String getBoard(BoardVO vo, Model model) {
-//		mav.addObject("board", boardDAO.getBoard(vo));
-//		mav.setViewName("getBoard.jsp");
-//		return mav;
-		model.addAttribute("board", boardService.getBoard(vo));
-		return "getBoard.jsp";
-	}
-
+	// 검색 조건 목록 설정
 	@ModelAttribute("conditionMap")
 	public Map<String, String> searchConditionMap() {
 		Map<String, String> conditionMap = new HashMap<String, String>();
@@ -63,20 +57,17 @@ public class BoardController {
 		return conditionMap;
 	}
 
-	@RequestMapping("/getBoardList.do")
-	public String getBoardList(BoardVO vo, Model model) {
-//		mav.addObject("boardList", boardDAO.getBoardList(vo));
-//		mav.setViewName("getBoardList.jsp");
-//		return mav;
-		model.addAttribute("boardList", boardService.getBoardList(vo));
-		return "getBoardList.jsp";
+	// 게시글 상세 조회
+	@RequestMapping(value = "/getBoard.do")
+	public String getBoard(BoardVO vo, Model model) {
+		model.addAttribute("board", boardservice.getBoard(vo));
+		return "getBoard.jsp";
+	}
 
-//      requestParam 이용한 방법
-//		@RequestMapping("/getBoardList.do")
-//		public String getBoardList(@RequestParam(value = "searchCondition", defaultValue="TITLE",required = false) String condition, @RequestParam(value = "searchKeyword", defaultValue="", required = false)String keyword, BoardVO vo,BoardDAO boardDAO, Model model) {
-//			System.out.println("검색 조건 : " + condition);
-//			System.out.println("검색 단어 : " + keyword);
-//			model.addAttribute("boardList", boardDAO.getBoardList(vo));
-//			return "getBoardList.jsp";
+	// 게시글 리스트
+	@RequestMapping(value = "/getBoardList.do")
+	public String getBoardList(BoardVO vo, Model model) {
+		model.addAttribute("boardList", boardservice.getBoardList(vo));
+		return "getBoardList.jsp";
 	}
 }

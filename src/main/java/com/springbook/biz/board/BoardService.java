@@ -7,7 +7,7 @@ public interface BoardService {
 	
 	void insertBoard(BoardVO vo);
 
-	void updateBoard(BoardVO vo, String updatePurson);
+	void updateBoard(BoardVO vo);
 
 	void deleteBoard(BoardVO vo);
 

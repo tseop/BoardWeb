@@ -53,8 +53,9 @@ public class BoardDAO {
 		}
 	}
 
-	public void updateBoard(BoardVO vo, String updatePurson) {
-		System.out.println(updatePurson + "님이 " + vo.getWriter() + "님의 게시물 '" + vo.getTitle() + "' 에서 updateBoard 기능 사용 ( " + format_time1 + " )");
+	public void updateBoard(BoardVO vo) {
+		System.out.println("님이 " + vo.getWriter() + "님의 게시물 '" + vo.getTitle() + "' 에서 updateBoard 기능 사용 ( "
+				+ format_time1 + " )");
 
 		conn = JDBCUtil.getConnention();
 
@@ -67,7 +68,7 @@ public class BoardDAO {
 
 			stmt = conn.prepareStatement(UPDATE_LOG);
 			stmt.setInt(1, vo.getSeq());
-			stmt.setString(2, updatePurson);
+			stmt.setString(2, vo.getWriter());
 			stmt.setString(3, vo.getTitle());
 			stmt.setString(4, format_time1);
 			stmt.executeUpdate();
