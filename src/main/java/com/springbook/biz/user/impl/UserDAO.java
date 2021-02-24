@@ -12,7 +12,7 @@ import com.springbook.biz.user.UserVO;
 
 @Repository("userDAO")
 public class UserDAO {
-
+//git test
 	private Connection conn = null;
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
