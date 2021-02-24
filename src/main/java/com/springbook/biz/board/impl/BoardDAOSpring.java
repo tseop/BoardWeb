@@ -34,7 +34,7 @@ public class BoardDAOSpring {
 		jdbcTemplate.update(BOARD_INSERT, vo.getTitle(), vo.getWriter(), vo.getContent());
 	}
 
-	public void updateBoard(BoardVO vo, String updatePurson) {
+	public void updateBoard(BoardVO vo) {
 		System.out.println("updateBoard 기능");
 		jdbcTemplate.update(BOARD_UPDATE, vo.getTitle(), vo.getContent(), vo.getSeq());
 	}

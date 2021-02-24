@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import javax.print.attribute.HashPrintRequestAttributeSet;
-
 import org.springframework.stereotype.Repository;
 
 import com.springbook.biz.board.BoardVO;

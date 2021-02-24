@@ -43,7 +43,6 @@ public class BoardController {
 	// 글 삭제
 	@RequestMapping(value = "/deleteBoard.do")
 	public String deleteBoard(BoardVO vo) {
-
 		boardservice.deleteBoard(vo);
 		return "getBoardList.do";// return "getBoardList.do";
 	}
